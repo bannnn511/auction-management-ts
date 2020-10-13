@@ -9,29 +9,33 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import AuctionManagements from './auctionManagements';
+import Buyers from './buyers';
 
 @Table({
   timestamps: true,
-  tableName: 'auction_histories',
+  tableName: 'auction_participatings',
 })
-export default class AuctionHistories extends Model<AuctionHistories> {
+export default class AuctionParticipatings extends Model<
+  AuctionParticipatings
+> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
+  @ForeignKey(() => Buyers)
   @Column({ type: DataType.UUIDV4, field: 'user_id' })
   userId!: string;
 
   @ForeignKey(() => AuctionManagements)
   @Column({ type: DataType.UUIDV4, field: 'auction_id' })
-  auctionId!: string;
+  auctionid!: string;
 
-  @BelongsTo(() => AuctionManagements)
-  auctions!: AuctionManagements;
+  @Column
+  status!: boolean;
 
-  @Column({ type: DataType.FLOAT })
-  price!: number;
+  @Column({ type: DataType.BOOLEAN, field: 'is_reminder_created' })
+  isReminderCreated!: boolean;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })
   createdBy!: string;
