@@ -1,3 +1,7 @@
+/* eslint-disable radix */
+import { Request } from 'express';
+import _ from 'lodash';
+
 export function safeParseFloat(input: number, defaultValue: number) {
   if (!input || typeof input === 'number') {
     return input || defaultValue;
@@ -41,14 +45,15 @@ export function toDateString(input: Date) {
   if (!input) {
     return null;
   }
-  input = new Date(input);
+  const date = new Date(input);
 
-  return input.toLocaleString();
+  return date.toLocaleString();
 }
 
-export function getToken(req: any) {
+export function getToken(req: Request) {
   if (req.header('Authorization')) {
-    return req.header('Authorization').replace('Bearer', '').replace(/\s/g, '');
+    const header = _.defaultTo(req.header('Authorization'), '');
+    return header.replace('Bearer', '').replace(/\s/g, '');
   }
   return null;
 }

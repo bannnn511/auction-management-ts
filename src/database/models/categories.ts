@@ -2,27 +2,27 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
-  CreatedAt,
-  UpdatedAt,
   IsUUID,
   DataType,
   Unique,
-  AllowNull,
+  BelongsToMany,
+  HasMany,
 } from 'sequelize-typescript';
+import { Products, CategoriesManagements, Favorites } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'categories',
 })
-export default class Categories extends Model<Categories> {
+export class Categories extends Model<Categories> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
-  @Column
+  @Unique
+  @Column({ field: 'category_name' })
   categoryName!: string;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })
@@ -30,4 +30,11 @@ export default class Categories extends Model<Categories> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  // Associations
+  @BelongsToMany(() => Products, () => CategoriesManagements)
+  products!: Products[];
+
+  @HasMany(() => Favorites)
+  favorites!: Favorites[];
 }

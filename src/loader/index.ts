@@ -1,13 +1,15 @@
 import { Server } from 'https';
+import _ from 'lodash';
 import expressLoader from './express';
 import * as redisLoader from './redis';
 import socketLoader from './socket';
-
+import { sequelize } from '../database/sequelize';
 /**
  * Initialize Loader
- * Init express.
+ * Init Express.
  * Init Redis.
  * Init Socket.
+ * Init Sequelize
  * Start cron jobs.
  *
  * @param {*} app - Express app.
@@ -16,17 +18,24 @@ import socketLoader from './socket';
 async function init(app: any, server: Server) {
   // Express
   await expressLoader({ app });
-  console.log('Express Initalized');
+  console.log('Express Initialized');
 
   // Redis
   redisLoader.init();
-  console.log('Redis Initalized');
+  console.log('Redis Initialized');
 
   // Socket
   const { io, activeAuctions } = socketLoader.init(server);
-  console.log('Socket Initalized');
+  console.log('Socket Initialized');
   app.set('socket', io);
   app.set('activeAuctions', activeAuctions);
+
+  // sequelize
+  const dbName = _.toString(process.env.MYSQL_DB);
+  const dbUserName = _.toString(process.env.MYSQL_USERNAME);
+  const dbPassword = _.toString(process.env.MYSQL_PASSWORD);
+  await sequelize(dbName, dbUserName, dbPassword).sync({ force: true });
+  console.log('Sequelize Initialized');
 
   // Cron jobs
   // const cronJobs = new Cron(app);

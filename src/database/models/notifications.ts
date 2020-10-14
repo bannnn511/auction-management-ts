@@ -2,32 +2,34 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
   IsUUID,
   DataType,
-  Unique,
   AllowNull,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { Buyers } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'notifications',
 })
-export default class Notifications extends Model<Notifications> {
+export class Notifications extends Model<Notifications> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
   @AllowNull(false)
-  @Column({ type: DataType.UUIDV4 })
+  @ForeignKey(() => Buyers)
+  @Column({ type: DataType.UUIDV4, field: 'user_id' })
   userId!: string;
 
-  @Column
+  @Column({ type: DataType.TEXT })
   description!: string;
 
-  @Column
+  @Column({ field: 'is_read' })
   isRead!: boolean;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })
@@ -35,4 +37,8 @@ export default class Notifications extends Model<Notifications> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  // Associations
+  @BelongsTo(() => Buyers)
+  user!: Buyers;
 }

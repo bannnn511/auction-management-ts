@@ -2,31 +2,33 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
   IsUUID,
   DataType,
-  Unique,
-  AllowNull,
+  ForeignKey,
 } from 'sequelize-typescript';
+import { Buyers, AuctionManagements } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'ratings',
 })
-export default class Ratings extends Model<Ratings> {
+export class Ratings extends Model<Ratings> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
-  @Column({ type: DataType.UUIDV4 })
+  @ForeignKey(() => Buyers)
+  @Column({ type: DataType.UUIDV4, field: 'rater_id' })
   raterId!: string;
 
-  @Column({ type: DataType.UUIDV4 })
+  @ForeignKey(() => Buyers)
+  @Column({ type: DataType.UUIDV4, field: 'rated_id' })
   ratedId!: string;
 
-  @Column({ type: DataType.UUIDV4 })
+  @ForeignKey(() => AuctionManagements)
+  @Column({ type: DataType.UUIDV4, field: 'auction_id' })
   auctionId!: string;
 
   @Column({ type: DataType.TEXT })

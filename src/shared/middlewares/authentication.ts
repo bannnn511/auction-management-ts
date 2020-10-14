@@ -23,7 +23,7 @@ export async function authentication(req: any, res: any, next: any) {
     }
     console.log(req.header('Authorization'));
 
-    const token = getToken(req);
+    const token = _.toString(getToken(req));
     const secretKey = _.toString(process.env.JWT_SECRET_KEY);
     const data = jwt.verify(token, secretKey, (err: any, decoded: any) => {
       if (err) {

@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import util from 'util';
 import { AppError } from '../utils';
 
-export function responseSuccess(res: any, data: any, status: number) {
+export function responseSuccess(res: any, data: any, status?: number) {
   if (data) {
     console.log(
       chalk.greenBright(

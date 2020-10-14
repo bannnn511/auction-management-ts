@@ -1,4 +1,3 @@
-export * from './sequelize';
 export * from './auctionHistories';
 export * from './auctionManagements';
 export * from './auctionParticipatings';

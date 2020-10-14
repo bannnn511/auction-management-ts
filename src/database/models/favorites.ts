@@ -2,32 +2,33 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
-  CreatedAt,
-  UpdatedAt,
   IsUUID,
   DataType,
-  Unique,
-  AllowNull,
+  ForeignKey,
+  BelongsTo,
 } from 'sequelize-typescript';
+import { Buyers, Products, Categories } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'favorites',
 })
-export default class Favorites extends Model<Favorites> {
+export class Favorites extends Model<Favorites> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
+  @ForeignKey(() => Buyers)
   @Column({ type: DataType.UUIDV4 })
   userId!: string;
 
+  @ForeignKey(() => Products)
   @Column({ type: DataType.UUIDV4 })
   productId!: string;
 
+  @ForeignKey(() => Categories)
   @Column({ type: DataType.UUIDV4 })
   categoryId!: string;
 
@@ -36,4 +37,14 @@ export default class Favorites extends Model<Favorites> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  // Associations
+  @BelongsTo(() => Categories)
+  category!: Categories;
+
+  @BelongsTo(() => Products)
+  product!: Products;
+
+  @BelongsTo(() => Buyers)
+  user!: Buyers;
 }

@@ -6,18 +6,14 @@ import {
   IsUUID,
   DataType,
   ForeignKey,
-  BelongsTo,
 } from 'sequelize-typescript';
-import AuctionManagements from './auctionManagements';
-import Buyers from './buyers';
+import { AuctionManagements, Buyers } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'auction_participatings',
 })
-export default class AuctionParticipatings extends Model<
-  AuctionParticipatings
-> {
+export class AuctionParticipatings extends Model<AuctionParticipatings> {
   @IsUUID(4)
   @PrimaryKey
   @Column
@@ -29,7 +25,7 @@ export default class AuctionParticipatings extends Model<
 
   @ForeignKey(() => AuctionManagements)
   @Column({ type: DataType.UUIDV4, field: 'auction_id' })
-  auctionid!: string;
+  auctionId!: string;
 
   @Column
   status!: boolean;

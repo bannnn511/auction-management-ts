@@ -2,31 +2,28 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
-  CreatedAt,
-  UpdatedAt,
   IsUUID,
   DataType,
-  Unique,
-  AllowNull,
+  ForeignKey,
 } from 'sequelize-typescript';
+import { Categories, Products } from '.';
 
 @Table({
   timestamps: true,
-  tableName: 'categories_managments',
+  tableName: 'categories_managements',
 })
-export default class CategoriesManagements extends Model<
-  CategoriesManagements
-> {
+export class CategoriesManagements extends Model<CategoriesManagements> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
+  @ForeignKey(() => Categories)
   @Column({ type: DataType.UUIDV4 })
   categoryId!: string;
 
+  @ForeignKey(() => Products)
   @Column({ type: DataType.UUIDV4 })
   productId!: string;
 

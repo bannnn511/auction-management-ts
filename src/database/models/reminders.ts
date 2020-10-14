@@ -2,34 +2,35 @@ import {
   Table,
   Column,
   Model,
-  HasMany,
   PrimaryKey,
   IsUUID,
   DataType,
-  Unique,
-  AllowNull,
+  ForeignKey,
 } from 'sequelize-typescript';
+import { Buyers, AuctionManagements } from '.';
 
 @Table({
   timestamps: true,
-  tableName: 'ratings',
+  tableName: 'reminders',
 })
-export default class Ratings extends Model<Ratings> {
+export class Reminders extends Model<Reminders> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
-  @Column
+  @ForeignKey(() => Buyers)
+  @Column({ type: DataType.UUIDV4, field: 'user_id' })
   userId!: string;
 
-  @Column
+  @ForeignKey(() => AuctionManagements)
+  @Column({ type: DataType.UUIDV4, field: 'auction_id' })
   auctionId!: string;
 
-  @Column
+  @Column({ field: 'push_at' })
   pushAt!: Date;
 
-  @Column
+  @Column({ field: 'is_pushed' })
   isPushed!: boolean;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })

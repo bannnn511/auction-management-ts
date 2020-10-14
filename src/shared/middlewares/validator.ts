@@ -13,7 +13,7 @@ import { responseError } from '../helpers';
 export function validateSchema(
   value: object,
   schema: Schema,
-  options: ValidationOptions,
+  options?: ValidationOptions,
 ) {
   return new Promise((resolve, reject) =>
     schema
@@ -34,7 +34,7 @@ export function validateSchema(
 function commonValidator(
   schema: Schema,
   key: string,
-  options: ValidationOptions,
+  options?: ValidationOptions,
 ) {
   return async (req: any, res: any, next: any) => {
     try {
@@ -49,21 +49,21 @@ function commonValidator(
   };
 }
 
-export function validateParams(schema: Schema, options: ValidationOptions) {
+export function validateParams(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'params', options);
 }
 
-export function validateBody(schema: Schema, options: ValidationOptions) {
+export function validateBody(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'body', options);
 }
 
-export function validateQuery(schema: Schema, options: ValidationOptions) {
+export function validateQuery(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'query', {
     ...options,
     allowUnknown: true,
   });
 }
 
-export function validateHeader(schema: Schema, options: ValidationOptions) {
+export function validateHeader(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'headers', options);
 }

@@ -6,24 +6,37 @@ import {
   IsUUID,
   DataType,
   HasMany,
+  BelongsToMany,
+  ForeignKey,
+  HasOne,
 } from 'sequelize-typescript';
-import AuctionHistories from './auctionHistories';
+import {
+  Products,
+  AuctionHistories,
+  AuctionParticipatings,
+  Ratings,
+  Reminders,
+  Buyers,
+} from '.';
 
 @Table({
   timestamps: true,
 })
-export default class AuctionManagements extends Model<AuctionManagements> {
+export class AuctionManagements extends Model<AuctionManagements> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
+  @ForeignKey(() => Buyers)
   @Column({ type: DataType.UUIDV4, field: 'buyer_id' })
   buyerId!: string;
 
+  @ForeignKey(() => Buyers)
   @Column({ type: DataType.UUIDV4, field: 'seller_id' })
   sellerId!: string;
 
+  @ForeignKey(() => Products)
   @Column({ type: DataType.UUIDV4, field: 'product_id' })
   productId!: string;
 
@@ -39,6 +52,19 @@ export default class AuctionManagements extends Model<AuctionManagements> {
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
 
+  // Associations
   @HasMany(() => AuctionHistories)
   histories!: AuctionHistories[];
+
+  @BelongsToMany(() => Buyers, () => AuctionParticipatings)
+  users!: Buyers[];
+
+  @HasOne(() => Products)
+  products!: Products;
+
+  @BelongsToMany(() => Buyers, () => Ratings)
+  ratings!: Buyers[];
+
+  @HasMany(() => Reminders)
+  reminders!: Reminders[];
 }

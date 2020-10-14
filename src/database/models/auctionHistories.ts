@@ -8,13 +8,13 @@ import {
   ForeignKey,
   BelongsTo,
 } from 'sequelize-typescript';
-import AuctionManagements from './auctionManagements';
+import { AuctionManagements } from '.';
 
 @Table({
   timestamps: true,
   tableName: 'auction_histories',
 })
-export default class AuctionHistories extends Model<AuctionHistories> {
+export class AuctionHistories extends Model<AuctionHistories> {
   @IsUUID(4)
   @PrimaryKey
   @Column
@@ -27,9 +27,6 @@ export default class AuctionHistories extends Model<AuctionHistories> {
   @Column({ type: DataType.UUIDV4, field: 'auction_id' })
   auctionId!: string;
 
-  @BelongsTo(() => AuctionManagements)
-  auctions!: AuctionManagements;
-
   @Column({ type: DataType.FLOAT })
   price!: number;
 
@@ -38,4 +35,8 @@ export default class AuctionHistories extends Model<AuctionHistories> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  // Associations
+  @BelongsTo(() => AuctionManagements)
+  auctions!: AuctionManagements;
 }

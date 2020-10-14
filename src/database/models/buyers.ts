@@ -4,31 +4,37 @@ import {
   Model,
   HasMany,
   PrimaryKey,
-  CreatedAt,
-  UpdatedAt,
   IsUUID,
   DataType,
   Unique,
   AllowNull,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import {
+  Products,
+  AuctionManagements,
+  Ratings,
+  Notifications,
+  Favorites,
+} from '.';
 
 @Table({
   timestamps: true,
   tableName: 'buyers',
 })
-export default class Buyers extends Model<Buyers> {
+export class Buyers extends Model<Buyers> {
   @IsUUID(4)
   @PrimaryKey
   @Column
   id!: string;
 
-  @Column
   @Unique
   @AllowNull(false)
+  @Column
   email!: string;
 
-  @Column
   @AllowNull(false)
+  @Column
   password!: string;
 
   @Column({ type: DataType.ENUM, values: ['buyer', 'seller', 'admin'] })
@@ -43,13 +49,13 @@ export default class Buyers extends Model<Buyers> {
   @Column
   fullname!: string;
 
-  @Column
+  @Column({ field: 'is_seller' })
   isSeller!: boolean;
 
-  @Column
+  @Column({ field: 'plus_point' })
   plusPoint!: number;
 
-  @Column
+  @Column({ field: 'minus_point' })
   minusPoint!: number;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })
@@ -57,4 +63,20 @@ export default class Buyers extends Model<Buyers> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  // Associations
+  @HasMany(() => Favorites)
+  favorites!: Favorites[];
+
+  @BelongsToMany(() => Products, () => AuctionManagements)
+  products!: Products[];
+
+  @BelongsToMany(() => AuctionManagements, () => Ratings, 'raterId')
+  rater!: Ratings[];
+
+  @BelongsToMany(() => AuctionManagements, () => Ratings, 'ratedId')
+  rated!: Ratings[];
+
+  @HasMany(() => Notifications)
+  notifications!: Notifications[];
 }
