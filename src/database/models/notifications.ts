@@ -8,6 +8,8 @@ import {
   AllowNull,
   ForeignKey,
   BelongsTo,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Buyers } from '.';
 
@@ -37,6 +39,12 @@ export class Notifications extends Model<Notifications> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 
   // Associations
   @BelongsTo(() => Buyers)

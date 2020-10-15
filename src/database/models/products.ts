@@ -5,6 +5,8 @@ import {
   PrimaryKey,
   IsUUID,
   DataType,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 
 @Table({
@@ -34,4 +36,10 @@ export class Products extends Model<Products> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 }

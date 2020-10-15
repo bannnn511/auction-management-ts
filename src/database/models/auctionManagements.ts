@@ -8,7 +8,9 @@ import {
   HasMany,
   BelongsToMany,
   ForeignKey,
-  HasOne,
+  CreatedAt,
+  UpdatedAt,
+  // HasOne,
 } from 'sequelize-typescript';
 import {
   Products,
@@ -52,6 +54,12 @@ export class AuctionManagements extends Model<AuctionManagements> {
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
 
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
+
   // Associations
   @HasMany(() => AuctionHistories)
   histories!: AuctionHistories[];
@@ -59,8 +67,8 @@ export class AuctionManagements extends Model<AuctionManagements> {
   @BelongsToMany(() => Buyers, () => AuctionParticipatings)
   users!: Buyers[];
 
-  @HasOne(() => Products)
-  products!: Products;
+  // @HasOne(() => Products, 'product')
+  // products!: Products;
 
   @BelongsToMany(() => Buyers, () => Ratings)
   ratings!: Buyers[];

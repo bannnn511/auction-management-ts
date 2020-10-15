@@ -34,7 +34,7 @@ export async function authentication(req: any, res: any, next: any) {
     });
 
     console.log('Requested from Authorization ☔: ', data);
-    const user = await getUserById(_.get(data, 'data.id'));
+    const user = await getUserById(_.get(data, 'id'));
     if (!user) {
       throw new AppError('User does not exist', 401, true);
     }

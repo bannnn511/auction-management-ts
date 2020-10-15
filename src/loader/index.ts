@@ -34,7 +34,7 @@ async function init(app: any, server: Server) {
   const dbName = _.toString(process.env.MYSQL_DB);
   const dbUserName = _.toString(process.env.MYSQL_USERNAME);
   const dbPassword = _.toString(process.env.MYSQL_PASSWORD);
-  await sequelize(dbName, dbUserName, dbPassword).sync({ force: true });
+  sequelize(dbName, dbUserName, dbPassword);
   console.log('Sequelize Initialized');
 
   // Cron jobs

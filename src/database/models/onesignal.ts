@@ -8,6 +8,8 @@ import {
   Unique,
   AllowNull,
   ForeignKey,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Buyers } from '.';
 
@@ -29,4 +31,10 @@ export class OneSignal extends Model<OneSignal> {
   @AllowNull(false)
   @Column({ type: DataType.UUIDV4, field: 'player_id' })
   playerId!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 }

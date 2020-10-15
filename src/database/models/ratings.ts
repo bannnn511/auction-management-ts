@@ -6,6 +6,8 @@ import {
   IsUUID,
   DataType,
   ForeignKey,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Buyers, AuctionManagements } from '.';
 
@@ -42,4 +44,10 @@ export class Ratings extends Model<Ratings> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 }

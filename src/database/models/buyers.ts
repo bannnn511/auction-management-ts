@@ -9,6 +9,8 @@ import {
   Unique,
   AllowNull,
   BelongsToMany,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import {
   Products,
@@ -63,6 +65,12 @@ export class Buyers extends Model<Buyers> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 
   // Associations
   @HasMany(() => Favorites)

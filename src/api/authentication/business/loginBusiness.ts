@@ -16,19 +16,20 @@ import { AppError } from '../../../shared/utils';
 export async function loginBusiness(req: Request): Promise<object> {
   const { email, password } = req.body;
 
-  const passOfUser = await getUserPassword(email);
-  const match = await bcrypt.compare(passOfUser, password);
+  const passOfUser = _.toString(await getUserPassword(email));
+  const match = await bcrypt.compare(password, passOfUser);
   if (match) {
-    const user = await getUserByEmailAndPassword(email, password);
+    const user = await getUserByEmailAndPassword(email, passOfUser);
 
     if (!user) {
       throw new AppError('Username or password does not exist.', 500, true);
     }
 
+    // token expires in 15 minutes
     const token = jwt.sign(
       { id: user.id, permissions: user.type },
       _.toString(process.env.JWT_SECRET_KEY),
-      { expiresIn: '15p' },
+      { expiresIn: '1h' },
     );
 
     return { token };

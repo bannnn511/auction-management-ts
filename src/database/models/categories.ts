@@ -8,6 +8,8 @@ import {
   Unique,
   BelongsToMany,
   HasMany,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Products, CategoriesManagements, Favorites } from '.';
 
@@ -30,6 +32,12 @@ export class Categories extends Model<Categories> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 
   // Associations
   @BelongsToMany(() => Products, () => CategoriesManagements)

@@ -7,6 +7,8 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Buyers, Products, Categories } from '.';
 
@@ -37,6 +39,12 @@ export class Favorites extends Model<Favorites> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 
   // Associations
   @BelongsTo(() => Categories)

@@ -7,6 +7,8 @@ import {
   DataType,
   ForeignKey,
   BelongsTo,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { AuctionManagements } from '.';
 
@@ -35,6 +37,12 @@ export class AuctionHistories extends Model<AuctionHistories> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 
   // Associations
   @BelongsTo(() => AuctionManagements)

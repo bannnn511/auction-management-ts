@@ -6,6 +6,8 @@ import {
   IsUUID,
   DataType,
   ForeignKey,
+  CreatedAt,
+  UpdatedAt,
 } from 'sequelize-typescript';
 import { Categories, Products } from '.';
 
@@ -32,4 +34,10 @@ export class CategoriesManagements extends Model<CategoriesManagements> {
 
   @Column({ type: DataType.UUIDV4, field: 'updated_by' })
   updatedBy!: string;
+
+  @CreatedAt
+  created_at!: Date;
+
+  @UpdatedAt
+  updated_at!: Date;
 }
