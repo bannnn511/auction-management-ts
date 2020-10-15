@@ -1,9 +1,10 @@
+import { Response } from 'express';
 import _ from 'lodash';
 import chalk from 'chalk';
 import util from 'util';
 import { AppError } from '../utils';
 
-export function responseSuccess(res: any, data: any, status?: number) {
+export function responseSuccess(res: Response, data: any, status?: number) {
   if (data) {
     console.log(
       chalk.greenBright(
@@ -21,7 +22,7 @@ export function responseSuccess(res: any, data: any, status?: number) {
   return null;
 }
 
-export function responseError(res: any, error: AppError) {
+export function responseError(res: Response, error: AppError) {
   console.error(
     chalk.yellow(util.inspect({ error }, { showHidden: false, depth: null })),
   );

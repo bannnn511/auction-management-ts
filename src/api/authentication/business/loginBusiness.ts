@@ -8,7 +8,12 @@ import {
 } from '../../buyers/database';
 import { AppError } from '../../../shared/utils';
 
-export async function loginBusiness(req: Request) {
+/**
+ * Login Business.
+ * Compare password with hash password in database.
+ * @returns {Promise<object>} - Return JSON web token.
+ */
+export async function loginBusiness(req: Request): Promise<object> {
   const { email, password } = req.body;
 
   const passOfUser = await getUserPassword(email);

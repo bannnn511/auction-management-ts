@@ -7,6 +7,15 @@ import {
   registerUserBusiness,
 } from './business';
 
+/**
+ * Login controller.
+ * Response token.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
 export async function login(req: Request, res: Response, next: any) {
   try {
     const token = await loginBusiness(req);
@@ -16,6 +25,15 @@ export async function login(req: Request, res: Response, next: any) {
   }
 }
 
+/**
+ * Register account controller.
+ * Response new account information.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
 export async function register(req: Request, res: Response, next: any) {
   try {
     const data = await registerUserBusiness(req);
@@ -26,6 +44,14 @@ export async function register(req: Request, res: Response, next: any) {
   }
 }
 
+/**
+ * Logout controller
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
 export async function logout(req: Request, res: Response, next: any) {
   try {
     responseSuccess(res, await logoutBusiness(req));

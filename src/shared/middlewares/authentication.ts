@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import { getUserById } from '../../api/buyers/database';
 import { getToken } from '../helpers';
 import { AppError } from '../utils';
 // import { getLoginUserById } from '../../api/Auth/database';
@@ -33,13 +34,12 @@ export async function authentication(req: any, res: any, next: any) {
     });
 
     console.log('Requested from Authorization ☔: ', data);
+    const user = await getUserById(_.get(data, 'data.id'));
+    if (!user) {
+      throw new AppError('User does not exist', 401, true);
+    }
 
-    // const user = await getLoginUserById(data.id);
-    // if (!user) {
-    //   throw new AppError('User does not exist', 401, true);
-    // }
-    // req.currentUser = serializeBuyers(user);
-
+    req.currentUser = user;
     next();
   } catch (error) {
     next(error);

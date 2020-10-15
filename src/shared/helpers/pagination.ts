@@ -1,6 +1,6 @@
+import Joi from 'joi';
 import { defaultLimit } from './constant';
 import { safeParseInt } from './handleData';
-import Joi from 'joi';
 
 export const paginationSchema = Joi.object({
   page: Joi.number().integer().min(0),

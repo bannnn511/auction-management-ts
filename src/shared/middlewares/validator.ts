@@ -49,14 +49,38 @@ function commonValidator(
   };
 }
 
+/**
+ * Validate request parameters.
+ *
+ * @export
+ * @param {Schema} schema
+ * @param {ValidationOptions} [options]
+ * @return {*}
+ */
 export function validateParams(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'params', options);
 }
 
+/**
+ * Validate request body.
+ *
+ * @export
+ * @param {Schema} schema
+ * @param {ValidationOptions} [options]
+ * @return {*}
+ */
 export function validateBody(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'body', options);
 }
 
+/**
+ * Validate request query.
+ *
+ * @export
+ * @param {Schema} schema
+ * @param {ValidationOptions} [options]
+ * @return {*}
+ */
 export function validateQuery(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'query', {
     ...options,
@@ -64,6 +88,14 @@ export function validateQuery(schema: Schema, options?: ValidationOptions) {
   });
 }
 
+/**
+ * Validate request header.
+ *
+ * @export
+ * @param {Schema} schema
+ * @param {ValidationOptions} [options]
+ * @return {*}
+ */
 export function validateHeader(schema: Schema, options?: ValidationOptions) {
   return commonValidator(schema, 'headers', options);
 }

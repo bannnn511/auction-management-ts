@@ -10,5 +10,4 @@ const sequelize = (dbName: string, dbUserName: string, dbPassword: string) => {
     models: [`${__dirname}./models`],
   });
 };
-
 export { sequelize };

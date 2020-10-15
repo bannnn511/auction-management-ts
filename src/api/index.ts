@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { authRouter } from './authentication/authentication.router';
+import { userRouter } from './buyers/buyer.router';
 
 const apiRouter = Router();
 
@@ -10,5 +11,5 @@ apiRouter.use('*', (req, res, next) => {
 });
 
 apiRouter.use('/auth', authRouter);
-
+apiRouter.use('/buyers', userRouter);
 export { apiRouter };

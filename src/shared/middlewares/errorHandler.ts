@@ -1,7 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Request, Response } from 'express';
 import { AppError } from '../utils';
 
-// eslint-disable-next-line no-unused-vars
-export function errorHandler(err: AppError, req: any, res: any, next: any) {
+/**
+ * Central error handler middleware.
+ * If is AppError return message.
+ * If not return ambiguous message.
+ *
+ * @export
+ * @param {AppError} err
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ * @return {*}
+ */
+export function errorHandler(
+  err: AppError,
+  req: Request,
+  res: Response,
+  next: any,
+) {
   console.error('🔥🔥🔥 Error handler', err);
 
   if (err.isAppError) {

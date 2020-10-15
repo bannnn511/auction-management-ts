@@ -1,8 +1,16 @@
 import { Request } from 'express';
+import { Buyers } from '../../../database/models';
 import { AppError } from '../../../shared/utils';
 import { createUser, getUserIdByEmail } from '../../buyers/database';
 
-export async function registerUserBusiness(req: Request) {
+/**
+ * Create new User.
+ * Check duplicate email.
+ *
+ * @export
+ * @return {Promise<Buyers>}
+ */
+export async function registerUserBusiness(req: Request): Promise<Buyers> {
   const { email } = req.body;
   const isUserExist = await getUserIdByEmail(email);
   if (!isUserExist) {

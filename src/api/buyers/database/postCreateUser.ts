@@ -7,9 +7,8 @@ import {
 } from '../../../shared/helpers/constant';
 
 import { Buyers } from '../../../database/models';
-import { User } from '../../../shared/models';
 
-export async function createUser(user: User) {
+export async function createUser(user: Buyers) {
   const hashPassword = await bcrypt.hash(user.password, Hash.SALT);
   return Buyers.create({
     email: user.email,
