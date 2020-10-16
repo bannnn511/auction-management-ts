@@ -14,6 +14,7 @@ import { serializeAllBuyers, serializeBuyers } from './buyer.serialize';
 export async function getAllUsers(req: Request, res: Response, next: any) {
   try {
     const data = await getAllUserBusiness(req);
+    console.log(data);
     responseSuccess(res, serializeAllBuyers(data));
   } catch (error) {
     next(error);

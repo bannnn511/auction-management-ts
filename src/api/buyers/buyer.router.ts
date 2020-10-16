@@ -3,7 +3,7 @@ import { UserType } from '../../shared/helpers/constant';
 import {
   changeBuyerOrSellerPasswordSchema,
   createBuyerOrSellerSchema,
-  updateBuyerOrSellerSchema,
+  updateUserSchema,
 } from './buyer.schema';
 import { paginationSchema } from '../../shared/helpers/pagination';
 import {
@@ -57,7 +57,7 @@ userRouter.post(
  */
 userRouter.put(
   '/:id',
-  validateBody(updateBuyerOrSellerSchema),
+  validateBody(updateUserSchema),
   authentication,
   redisValidation,
   updateUserInfo,

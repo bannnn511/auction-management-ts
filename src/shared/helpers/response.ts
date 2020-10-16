@@ -6,14 +6,10 @@ import { AppError } from '../utils';
 
 export function responseSuccess(res: Response, data: any, status?: number) {
   if (data) {
-    console.log(
-      chalk.greenBright(
-        util.inspect(
-          { data, total: _.defaultTo(data.length, 1) },
-          { showHidden: false, depth: null },
-        ),
-      ),
-    );
+    console.log({
+      data,
+      total: _.defaultTo(data.length, 1),
+    });
     return res
       .status(_.defaultTo(status, 200))
       .set({ 'x-total-count': _.defaultTo(data.length, 1) })

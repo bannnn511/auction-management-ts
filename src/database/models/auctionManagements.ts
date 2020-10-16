@@ -23,6 +23,7 @@ import {
 
 @Table({
   timestamps: true,
+  tableName: 'auction_managements',
 })
 export class AuctionManagements extends Model<AuctionManagements> {
   @IsUUID(4)
@@ -45,7 +46,7 @@ export class AuctionManagements extends Model<AuctionManagements> {
   @Column({ type: DataType.TEXT })
   description!: string;
 
-  @Column
+  @Column({ field: 'end_at' })
   endAt!: Date;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })

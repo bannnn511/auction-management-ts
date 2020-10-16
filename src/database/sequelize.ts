@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Sequelize } from 'sequelize-typescript';
 import {
   AuctionHistories,
@@ -14,8 +15,14 @@ import {
   Reminders,
 } from './models';
 
-const sequelize = (dbName: string, dbUserName: string, dbPassword: string) => {
-  return new Sequelize({
+require('dotenv').config();
+
+function sequelizeInit(
+  dbName: string,
+  dbUserName: string,
+  dbPassword: string,
+): Sequelize {
+  const sequelize = new Sequelize({
     database: dbName,
     dialect: 'mysql',
     username: dbUserName,
@@ -36,5 +43,13 @@ const sequelize = (dbName: string, dbUserName: string, dbPassword: string) => {
       Reminders,
     ],
   });
-};
+  console.log('Sequelize Initialized');
+  return sequelize;
+}
+
+const dbName = _.toString(process.env.MYSQL_DB);
+const dbUserName = _.toString(process.env.MYSQL_USERNAME);
+const dbPassword = _.toString(process.env.MYSQL_PASSWORD);
+const sequelize = sequelizeInit(dbName, dbUserName, dbPassword);
+
 export { sequelize };

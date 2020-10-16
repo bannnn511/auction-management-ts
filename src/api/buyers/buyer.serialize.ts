@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { BuyersObject } from '../../shared/models/user';
+import { BuyersObject } from '../../shared/models/buyerObject';
 import { UserStatus, UserType } from '../../shared/helpers/constant';
 import { safeParseInt } from '../../shared/helpers';
 import { Buyers } from '../../database/models';
@@ -9,6 +9,7 @@ export function serializeBuyers(
   showPassword?: boolean,
 ): BuyersObject {
   const data = new BuyersObject(
+    _.get(buyer, 'id', ''),
     _.get(buyer, 'email', ''),
     _.get(buyer, 'type', UserType.BUYER),
     _.get(buyer, 'status', UserStatus.ACTIVE),

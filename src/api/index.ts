@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { historiesRouter } from './auctionHistories/history.router';
 import { authRouter } from './authentication/authentication.router';
 import { userRouter } from './buyers/buyer.router';
 
@@ -12,4 +13,6 @@ apiRouter.use('*', (req, res, next) => {
 
 apiRouter.use('/auth', authRouter);
 apiRouter.use('/buyers', userRouter);
+apiRouter.use('/histories', historiesRouter);
+
 export { apiRouter };

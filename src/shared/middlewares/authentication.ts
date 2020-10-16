@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
+import { UserBanStatus } from '../helpers/constant';
 import { getUserById } from '../../api/buyers/database';
 import { getToken } from '../helpers';
 import { AppError } from '../utils';
@@ -11,6 +12,7 @@ import { AppError } from '../utils';
  * Check header for 'Authorization' field.
  * Check token valid.
  * Check user id exists in database.
+ * Check if user has been banned.
  *
  * @export
  * @param {Request} req
@@ -37,6 +39,10 @@ export async function authentication(req: any, res: any, next: any) {
     const user = await getUserById(_.get(data, 'id'));
     if (!user) {
       throw new AppError('User does not exist', 401, true);
+    }
+
+    if (user.status === UserBanStatus.BAN) {
+      throw new AppError('You have been banned', 403, true);
     }
 
     req.currentUser = user;

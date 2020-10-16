@@ -60,5 +60,6 @@ export async function updateAUserInfo(
       id,
       status: UserStatus.ACTIVE,
     },
+    raw: true,
   });
 }

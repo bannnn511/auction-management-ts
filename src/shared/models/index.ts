@@ -1,2 +1,3 @@
 export * from './onesignalMessage';
-export * from './user';
+export * from './buyerObject';
+export * from './historyObject';

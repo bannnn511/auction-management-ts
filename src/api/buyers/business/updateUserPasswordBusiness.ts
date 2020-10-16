@@ -5,7 +5,7 @@ import { updateUserPassword } from '../database';
 
 export async function updateUserPasswordBusiness(req: Request) {
   const { password } = req.body;
-  const id = _.get(req, 'currentUser.id');
+  const id = _.get(req, 'params.id');
   const user = await updateUserPassword(id, password);
   if (!user) {
     throw new AppError("Update User's password failed", 500, true);
