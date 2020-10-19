@@ -1,4 +1,7 @@
-import * as _ from 'lodash';
+import _ from 'lodash';
+import { AuctionHistories } from '../../database/models/auctionHistories';
+import { AuctionManagements } from '../../database/models/auctionManagements';
+import { Products } from '../../database/models';
 import { safeParseInt } from '../../shared/helpers';
 
 /**
@@ -11,8 +14,8 @@ import { safeParseInt } from '../../shared/helpers';
  * @return {*}
  */
 export function serializeAuctionHistoryFromProductAndAuction(
-  product: any,
-  auction: any,
+  product: Products,
+  auction: AuctionManagements,
 ) {
   if (product && auction) {
     return {
@@ -33,7 +36,7 @@ export function serializeAuctionHistoryFromProductAndAuction(
  * @param {*} auction
  * @return {*}
  */
-export function serializeAuctionHistory(auction: any) {
+export function serializeAuctionHistory(auction: AuctionHistories) {
   if (auction) {
     return {
       auctionId: _.get(auction, 'auctions.id', ''),

@@ -87,4 +87,7 @@ export class Buyers extends Model<Buyers> {
 
   @HasMany(() => Notifications)
   notifications!: Notifications[];
+
+  @HasMany(() => AuctionManagements, 'buyer_id')
+  auction!: AuctionManagements;
 }

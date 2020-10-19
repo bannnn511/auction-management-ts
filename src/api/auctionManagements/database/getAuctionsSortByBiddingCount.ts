@@ -6,6 +6,7 @@ import { defaultLimit } from '../../../shared/helpers/constant';
  * Query for getting auctions which has the highest bidding count.
  * Order by the highest bidding count.
  * Auction must not end.
+ * if option is not defined, then get default of 5.
  *
  * @export
  * @param {number} option - number of auctions you want to get.

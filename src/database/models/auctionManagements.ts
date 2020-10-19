@@ -10,6 +10,7 @@ import {
   ForeignKey,
   CreatedAt,
   UpdatedAt,
+  BelongsTo,
   // HasOne,
 } from 'sequelize-typescript';
 import {
@@ -65,15 +66,18 @@ export class AuctionManagements extends Model<AuctionManagements> {
   @HasMany(() => AuctionHistories)
   histories!: AuctionHistories[];
 
-  @BelongsToMany(() => Buyers, () => AuctionParticipatings)
+  @BelongsToMany(() => Buyers, () => AuctionParticipatings, 'auction_id')
   users!: Buyers[];
 
-  // @HasOne(() => Products, 'product')
-  // products!: Products;
+  @BelongsTo(() => Products)
+  products!: Products;
 
-  @BelongsToMany(() => Buyers, () => Ratings)
+  @BelongsToMany(() => Buyers, () => Ratings, 'auction_id')
   ratings!: Buyers[];
 
   @HasMany(() => Reminders)
   reminders!: Reminders[];
+
+  @BelongsTo(() => Buyers)
+  buyers!: Buyers;
 }

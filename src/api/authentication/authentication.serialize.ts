@@ -1,7 +1,6 @@
 import _ from 'lodash';
-import { Buyers } from '../../database/models';
 
-export function serializeUser(user: Buyers) {
+export function serializeUser(user: any) {
   if (user) {
     return {
       id: _.get(user, 'id', ''),

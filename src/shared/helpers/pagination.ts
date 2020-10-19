@@ -13,7 +13,7 @@ export const paginationSchema = Joi.object({
  * @export
  * @param {number} page - The index of page.
  * @param {number} pagesize - Size of page.
- * @return {number, number} - offset and limit for database query.
+ * @return {offset: number, limit: number} - offset and limit for database query.
  */
 export function pagination(page: number, pagesize: number) {
   const offset = safeParseInt(

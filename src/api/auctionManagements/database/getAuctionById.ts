@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Op } from 'sequelize/types';
+import { Op } from 'sequelize';
 import { AuctionManagements, Products } from '../../../database/models';
 
 /**
@@ -9,9 +9,11 @@ import { AuctionManagements, Products } from '../../../database/models';
  *
  * @export
  * @param {string} id - auction id.
- * @return {*}
+ * @return {Promise<AuctionManagements>}
  */
-export async function getAuctionById(id: string) {
+export async function getAuctionById(
+  id: string,
+): Promise<AuctionManagements | null> {
   const auctions = await AuctionManagements.findOne({
     include: [
       {

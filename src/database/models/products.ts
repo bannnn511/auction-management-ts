@@ -7,7 +7,9 @@ import {
   DataType,
   CreatedAt,
   UpdatedAt,
+  HasOne,
 } from 'sequelize-typescript';
+import { AuctionManagements } from './auctionManagements';
 
 @Table({
   timestamps: true,
@@ -19,13 +21,13 @@ export class Products extends Model<Products> {
   @Column
   id!: string;
 
-  @Column
+  @Column({ field: 'product_name' })
   productName!: string;
 
-  @Column
+  @Column({ field: 'img_url' })
   imgURL!: string;
 
-  @Column({ type: DataType.DECIMAL })
+  @Column({ type: DataType.DECIMAL, field: 'current_price' })
   currentPrice!: number;
 
   @Column({ type: DataType.DECIMAL, field: 'buy_now_price' })
@@ -42,4 +44,8 @@ export class Products extends Model<Products> {
 
   @UpdatedAt
   updated_at!: Date;
+
+  // Associations
+  @HasOne(() => AuctionManagements)
+  auction!: AuctionManagements;
 }

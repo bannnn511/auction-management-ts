@@ -1,18 +1,26 @@
 import * as nodemailer from 'nodemailer';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+require('dotenv').config;
+
 const transport = nodemailer.createTransport({
-  host: 'smtp.mailtrap.io',
+  host: process.env.NODEMAILER_HOST,
   port: 25 || 465 || 687 || 2525,
   auth: {
-    user: process.env.NODEMAILER_USER || '6e4838306021a8',
-    pass: process.env.NODEMAILER_PASS || 'a9ed0a17483e43',
+    user: process.env.NODEMAILER_USER,
+    pass: process.env.NODEMAILER_PASS,
   },
 });
 
 class Email {
   message: object;
 
-  constructor(from: string, to: string[], subject: string, text: string) {
+  constructor(
+    from: string,
+    to: string | string[],
+    subject: string,
+    text: string,
+  ) {
     this.message = {
       from,
       to,
@@ -24,7 +32,7 @@ class Email {
   send() {
     transport.sendMail(this.message, (err: Error | null, info: object) => {
       if (err) {
-        console.log(err);
+        console.error(err);
       } else {
         console.log('📩', { 'Message send': info });
       }

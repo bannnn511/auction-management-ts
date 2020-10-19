@@ -4,18 +4,22 @@ import { AuctionManagements, Products } from '../../../database/models';
 import { pagination } from '../../../shared/helpers';
 
 /**
- * Query for getting all auctions.
- * 'auction_managements' join with 'products'.
- * Auctions must not end.
+ * Query for getting auctions which is on market -> auction not ended.
+ * buyerId in 'auction_managements' must be null.
  *
  * @export
- * @param {number} page - index of page.
- * @param {number} pagesize - size of page.
+ * @param {number} page - page index
+ * @param {number} pagesize - page size
+ * @param {string} sellerId - sellerId.
  * @return {*}
  */
-export async function getAllAuctions(page: number, pagesize: number) {
+export async function getAuctionOnMarketOfASeller(
+  page: number,
+  pagesize: number,
+  sellerId: string,
+) {
   const { offset, limit } = pagination(page, pagesize);
-  const auctions = await AuctionManagements.findAll({
+  return AuctionManagements.findAll({
     include: [
       {
         model: Products,
@@ -23,14 +27,13 @@ export async function getAllAuctions(page: number, pagesize: number) {
       },
     ],
     where: {
+      sellerId,
+      buyerId: null,
       endAt: {
         [Op.gt]: _.now(),
       },
     },
-    order: [['endAt', 'ASC']],
-    limit,
     offset,
-    raw: true,
+    limit,
   });
-  return auctions;
 }

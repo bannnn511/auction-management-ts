@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Op } from 'sequelize/types';
+import { Op } from 'sequelize';
 import { AuctionManagements, Products } from '../../../database/models';
 
 /**
