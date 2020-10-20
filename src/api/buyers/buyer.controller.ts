@@ -11,7 +11,11 @@ import {
 } from './business';
 import { serializeAllBuyers, serializeBuyers } from './buyer.serialize';
 
-export async function getAllUsers(req: Request, res: Response, next: any) {
+export async function getAllUsersController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await getAllUserBusiness(req);
     console.log(data);
@@ -21,7 +25,7 @@ export async function getAllUsers(req: Request, res: Response, next: any) {
   }
 }
 
-export async function getUserDetailWithId(
+export async function getUserDetailWithIdController(
   req: Request,
   res: Response,
   next: any,
@@ -34,7 +38,11 @@ export async function getUserDetailWithId(
   }
 }
 
-export async function createNewUser(req: Request, res: Response, next: any) {
+export async function createNewUserController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await createNewUserByAdminBusiness(req);
     responseSuccess(res, serializeBuyers(data));
@@ -47,7 +55,11 @@ export async function createNewUser(req: Request, res: Response, next: any) {
  * Delete user
  * Change status
  */
-export async function deleteUser(req: Request, res: Response, next: any) {
+export async function deleteUserController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await deleteUserBusiness(req);
     responseSuccess(res, serializeBuyers(data));
@@ -60,7 +72,7 @@ export async function deleteUser(req: Request, res: Response, next: any) {
  * Update buyer password
  * destroy token after update password
  */
-export async function updateUserPassword(
+export async function updateUserPasswordController(
   req: Request,
   res: Response,
   next: any,
@@ -81,7 +93,11 @@ export async function updateUserPassword(
  * Accept buyer request to be a seller - need to be admin
  * Update user basic info
  */
-export async function updateUserInfo(req: Request, res: Response, next: any) {
+export async function updateUserInfoController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await updateUserInfoBusiness(req);
     responseSuccess(res, serializeBuyers(data));

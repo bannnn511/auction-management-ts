@@ -9,8 +9,8 @@ import { AppError } from '../../../shared/utils';
 
 /**
  * Business for getting auctions.
- * If productname in request query, then get auctions base on productName.
- * If description in request query, then get auctions base on its description.
+ * If productname in request params, then get auctions base on productName.
+ * If description in request params, then get auctions base on its description.
  * Get all auctions by default.
  *
  * @export

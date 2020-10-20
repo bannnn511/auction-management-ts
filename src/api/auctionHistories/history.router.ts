@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { getWinningHistoryFromAuction } from './history.controller';
+import { getWinningHistoryFromAuctionController } from './history.controller';
 
 const historiesRouter = Router();
-historiesRouter.get('/', getWinningHistoryFromAuction);
+historiesRouter.get('/', getWinningHistoryFromAuctionController);
 
 export { historiesRouter };

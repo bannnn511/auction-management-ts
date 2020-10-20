@@ -16,7 +16,7 @@ import {
  * @param {Response} res
  * @param {*} next
  */
-export async function login(req: Request, res: Response, next: any) {
+export async function loginController(req: Request, res: Response, next: any) {
   try {
     const token = await loginBusiness(req);
     responseSuccess(res, token);
@@ -34,7 +34,11 @@ export async function login(req: Request, res: Response, next: any) {
  * @param {Response} res
  * @param {*} next
  */
-export async function register(req: Request, res: Response, next: any) {
+export async function registerController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await registerUserBusiness(req);
     const serializedData = serializeUser(data);
@@ -52,7 +56,7 @@ export async function register(req: Request, res: Response, next: any) {
  * @param {Response} res
  * @param {*} next
  */
-export async function logout(req: Request, res: Response, next: any) {
+export async function logoutController(req: Request, res: Response, next: any) {
   try {
     responseSuccess(res, await logoutBusiness(req));
   } catch (error) {

@@ -11,7 +11,7 @@ import { getWinningHistoryFromAuctionBusiness } from './business/getWinningHisto
  * @param {Response} res
  * @param {*} next
  */
-export async function getWinningHistoryFromAuction(
+export async function getWinningHistoryFromAuctionController(
   req: Request,
   res: Response,
   next: any,

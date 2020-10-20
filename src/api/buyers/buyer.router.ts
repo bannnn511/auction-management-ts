@@ -14,12 +14,12 @@ import {
   validateQuery,
 } from '../../shared';
 import {
-  createNewUser,
-  deleteUser,
-  getAllUsers,
-  getUserDetailWithId,
-  updateUserInfo,
-  updateUserPassword,
+  createNewUserController,
+  deleteUserController,
+  getAllUsersController,
+  getUserDetailWithIdController,
+  updateUserInfoController,
+  updateUserPasswordController,
 } from './buyer.controller';
 
 const userRouter = Router();
@@ -29,12 +29,12 @@ const userRouter = Router();
  * buyers or sellers
  * filter with type and status
  */
-userRouter.get('/', validateQuery(paginationSchema), getAllUsers);
+userRouter.get('/', validateQuery(paginationSchema), getAllUsersController);
 
 /**
  * Get User detail with theirs ID.
  */
-userRouter.get('/:id', getUserDetailWithId);
+userRouter.get('/:id', getUserDetailWithIdController);
 
 /**
  * Admin can create user or seller.
@@ -45,7 +45,7 @@ userRouter.post(
   authentication,
   redisValidation,
   restrictedTo(UserType.ADMIN),
-  createNewUser,
+  createNewUserController,
 );
 
 /**
@@ -60,7 +60,7 @@ userRouter.put(
   validateBody(updateUserSchema),
   authentication,
   redisValidation,
-  updateUserInfo,
+  updateUserInfoController,
 );
 
 /**
@@ -71,7 +71,7 @@ userRouter.post(
   validateBody(changeBuyerOrSellerPasswordSchema),
   authentication,
   redisValidation,
-  updateUserPassword,
+  updateUserPasswordController,
 );
 
 /**
@@ -82,7 +82,7 @@ userRouter.put(
   authentication,
   redisValidation,
   restrictedTo(UserType.ADMIN),
-  deleteUser,
+  deleteUserController,
 );
 
 export { userRouter };

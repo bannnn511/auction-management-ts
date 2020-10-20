@@ -3,21 +3,7 @@ import { AuctionManagements } from '../../database/models/auctionManagements';
 import { Products } from '../../database/models';
 import { toDateString, safeParseFloat } from '../../shared/helpers';
 
-export function serializeAuctionFromProduct(product: Products) {
-  if (product) {
-    const auction = {
-      sellerId: _.get(product, 'createdBy', ''),
-      productId: _.get(product, 'id', ''),
-      description: _.get(product, 'description', ''),
-      createdBy: _.get(product, 'createdBy', ''),
-      updatedBy: _.get(product, 'updatedBy', ''),
-      endAt: _.get(product, 'endAt', ''),
-    };
-    return auction;
-  }
-  return null;
-}
-
+// TODO: REFRACTOR ALL
 export function serializeAuctionAndProduct(
   product: Products,
   auction: AuctionManagements,
@@ -76,7 +62,7 @@ export function serializeAllAuctions(auctions: AuctionManagements[]) {
   if (auctions) {
     const newAuctions: any = [];
     auctions.forEach((auction: any) => {
-      newAuctions.push(serializeAnAuction(auction));
+      newAuctions.push(serializeFullAuctionJoinProduct(auction));
     });
     return newAuctions;
   }
@@ -92,7 +78,7 @@ export function serializeAuction(
   return serializeAnAuction(auction);
 }
 
-export function serializeAuctionHistory(auction: AuctionManagements) {
+export function serializeBuyerInAuction(auction: AuctionManagements) {
   if (auction) {
     return {
       userId: _.get(auction, 'user_id', ''),
@@ -105,19 +91,18 @@ export function serializeAuctionHistory(auction: AuctionManagements) {
   return null;
 }
 
-// TODO: Refractor all under this.
 export function serializeAllBuyerInAuction(auctions: any) {
   if (auctions) {
     const buyers: any = [];
     auctions.forEach((auction: any) => {
-      buyers.push(serializeAuctionHistory(auction));
+      buyers.push(serializeBuyerInAuction(auction));
     });
     return buyers;
   }
   return null;
 }
 
-export function serializeAuctionSortByBiddingCount(auctions: any) {
+export function serializeAuctionFromRawQuery(auctions: any) {
   if (auctions) {
     const data: any = [];
     auctions.forEach((auction: any) => {

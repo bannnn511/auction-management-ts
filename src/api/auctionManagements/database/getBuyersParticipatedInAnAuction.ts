@@ -1,3 +1,4 @@
+import { QueryTypes } from 'sequelize';
 import { sequelize } from '../../../database/sequelize';
 
 /**
@@ -8,7 +9,7 @@ import { sequelize } from '../../../database/sequelize';
  * @param {string} id - The auction id.
  * @return {*}
  */
-export async function getAllBuyersInAuction(id: string) {
+export async function getBuyersParticipatedInAnAuction(id: string) {
   return sequelize.query(
     `select  user_id, email, fullname, auction_id, MAX(price) as price
     from auctionDB.auction_histories as auctionHis, auctionDB.buyers as buyer
@@ -18,6 +19,7 @@ export async function getAllBuyersInAuction(id: string) {
     `,
     {
       raw: true,
+      type: QueryTypes.SELECT,
     },
   );
 }

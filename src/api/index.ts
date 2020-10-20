@@ -3,6 +3,7 @@ import { historiesRouter } from './auctionHistories/history.router';
 import { auctionRouter } from './auctionManagements/auctionManagements.router';
 import { authRouter } from './authentication/authentication.router';
 import { userRouter } from './buyers/buyer.router';
+import { categoriesRouter } from './categories/category.router';
 
 const apiRouter = Router();
 
@@ -16,5 +17,6 @@ apiRouter.use('/auth', authRouter);
 apiRouter.use('/buyers', userRouter);
 apiRouter.use('/histories', historiesRouter);
 apiRouter.use('/auctions', auctionRouter);
+apiRouter.use('/categories', categoriesRouter);
 
 export { apiRouter };

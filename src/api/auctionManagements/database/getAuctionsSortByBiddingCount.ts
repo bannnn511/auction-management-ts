@@ -1,7 +1,7 @@
+import { QueryTypes } from 'sequelize';
 import { sequelize } from '../../../database/sequelize';
 import { safeParseInt } from '../../../shared/helpers';
 import { defaultLimit } from '../../../shared/helpers/constant';
-
 /**
  * Query for getting auctions which has the highest bidding count.
  * Order by the highest bidding count.
@@ -26,6 +26,7 @@ export async function getAuctionsSortByBiddingCount(option: number) {
       `limit ${safeParseInt(option, defaultLimit.MAX)};`,
     {
       raw: true,
+      type: QueryTypes.SELECT,
     },
   );
 }

@@ -7,59 +7,58 @@ import {
   validateBody,
 } from '../../shared';
 import {
-  getListAuction,
-  getListBuyerInAuction,
-  getListAuctionSortByBiddingCount,
-  getListAuctionWithHighestPrice,
-  getListAuctionsSortByRemainingTime,
-  getAuctionSoldOnMarketOfASeller,
-  getAUserWinningAuction,
-  getAnAuctionById,
-  banUserFromAuction,
-  getAuctionOnMarketOfASeller,
+  getAuctionsController,
+  getBuyersInAuctionController,
+  getAuctionsSortByBiddingCountController,
+  getAuctionsWithHighestPriceController,
+  getAuctionsSortByRemainingTimeController,
+  getAuctionsSoldOnMarketOfASellerController,
+  getAUserWinningAuctionsController,
+  getAnAuctionByIdController,
+  banUserFromAuctionController,
+  getAuctionsOnMarketOfASellerController,
 } from './auctionManagements.controller';
 import { banUserFromAuctionSchema } from './auctionmanagments.schema';
 
 const auctionRouter = Router();
 
-auctionRouter.get('/', getListAuction);
-auctionRouter.get('/history', getListBuyerInAuction);
-auctionRouter.get('/highestbiddingcount', getListAuctionSortByBiddingCount);
-auctionRouter.get('/highestprice', getListAuctionWithHighestPrice);
-auctionRouter.get('/remainingtime', getListAuctionsSortByRemainingTime);
+auctionRouter.get('/', getAuctionsController);
+auctionRouter.get('/history', getBuyersInAuctionController);
+auctionRouter.get(
+  '/highestbiddingcount',
+  getAuctionsSortByBiddingCountController,
+);
+auctionRouter.get('/highestprice', getAuctionsWithHighestPriceController);
+auctionRouter.get('/remainingtime', getAuctionsSortByRemainingTimeController);
 auctionRouter.get(
   '/selling',
   authentication,
   redisValidation,
   restrictedTo(UserType.SELLER),
-  getAuctionOnMarketOfASeller,
+  getAuctionsOnMarketOfASellerController,
 );
 auctionRouter.get(
   '/sold',
   authentication,
   redisValidation,
   restrictedTo(UserType.SELLER),
-  getAuctionSoldOnMarketOfASeller,
+  getAuctionsSoldOnMarketOfASellerController,
 );
-auctionRouter.get('/:id/buyers', getListBuyerInAuction);
-
-/*
- * Get User winning auction products
- */
+auctionRouter.get('/:id/buyers', getBuyersInAuctionController);
 auctionRouter.get(
   '/bought-products',
   authentication,
   redisValidation,
-  getAUserWinningAuction,
+  getAUserWinningAuctionsController,
 );
-auctionRouter.get('/:id', getAnAuctionById);
+auctionRouter.get('/:id', getAnAuctionByIdController);
 auctionRouter.post(
   '/:id/ban',
   validateBody(banUserFromAuctionSchema),
   authentication,
   redisValidation,
   restrictedTo(UserType.SELLER),
-  banUserFromAuction,
+  banUserFromAuctionController,
 );
 
 export { auctionRouter };

@@ -4,7 +4,7 @@ export * from './getAuctionWithHighestProductsPrice';
 export * from './getAllAuctions';
 export * from './getAuctionById';
 export * from './getAuctionByProductName';
-export * from './getAuctionHistory';
+export * from './getBuyersParticipatedInAnAuction';
 export * from './getAuctionsOnMarket';
 export * from './getAuctionsThatHaveBeenSoldByASeller';
 export * from './getAuctionWithProductId';

@@ -5,7 +5,8 @@ import {
   serializeAllAuctions,
   serializeAllBuyerInAuction,
   serializeAuction,
-  serializeAuctionSortByBiddingCount,
+  serializeAuctionFromRawQuery,
+  serializeFullAuctionJoinProduct,
 } from './auctionManagements.serialize';
 import {
   banUserFromAuctionBusiness,
@@ -20,7 +21,20 @@ import {
 } from './business';
 import { getListAuctionsSortByRemainTimeBusiness } from './business/getListAuctionsSortByRemainingTimeBusiness';
 
-export async function getListAuction(req: Request, res: Response, next: any) {
+/**
+ * Controller for getting auctions with params.
+ *
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await getAllAuctionsBusiness(req);
     const auctionData = serializeAuction(data);
@@ -30,17 +44,37 @@ export async function getListAuction(req: Request, res: Response, next: any) {
   }
 }
 
-export async function getAnAuctionById(req: Request, res: Response, next: any) {
+/**
+ * Controller for getting an auction by its id.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAnAuctionByIdController(
+  req: Request,
+  res: Response,
+  next: any,
+) {
   try {
     const data = await getAuctionByIdBusiness(req);
-    const auctionData = serializeAuction(data);
+    const auctionData = serializeFullAuctionJoinProduct(data);
     responseSuccess(res, auctionData);
   } catch (error) {
     next(error);
   }
 }
 
-export async function getListAuctionWithHighestPrice(
+/**
+ * Controller for getting auctions sort by product highest price.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsWithHighestPriceController(
   req: Request,
   res: Response,
   next: any,
@@ -53,22 +87,37 @@ export async function getListAuctionWithHighestPrice(
     next(error);
   }
 }
-export async function getListAuctionSortByBiddingCount(
+/**
+ * Controller for getting auctions sort by highest bidding count.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsSortByBiddingCountController(
   req: Request,
   res: Response,
   next: any,
 ) {
   try {
     const data = await getListAuctionSortByBiddingCountBusiness(req);
-    const serializedData = serializeAuctionSortByBiddingCount(data);
+    const serializedData = serializeAuctionFromRawQuery(data);
     responseSuccess(res, serializedData);
   } catch (error) {
     next(error);
   }
 }
 
-// get list buyer in auction
-export async function getListBuyerInAuction(
+/**
+ * Controller for getting buyers who have participated in an auction.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getBuyersInAuctionController(
   req: Request,
   res: Response,
   next: any,
@@ -82,7 +131,15 @@ export async function getListBuyerInAuction(
   }
 }
 
-export async function getListAuctionsSortByRemainingTime(
+/**
+ * Controller for getting auctions sort by remaining end time.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsSortByRemainingTimeController(
   req: Request,
   res: Response,
   next: any,
@@ -96,7 +153,15 @@ export async function getListAuctionsSortByRemainingTime(
   }
 }
 
-export async function getAUserWinningAuction(
+/**
+ * Controller for getting auctions that a user have won.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAUserWinningAuctionsController(
   req: Request,
   res: Response,
   next: any,
@@ -110,7 +175,15 @@ export async function getAUserWinningAuction(
   }
 }
 
-export async function getAuctionOnMarketOfASeller(
+/**
+ * Controller for getting auctions on market of a seller.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsOnMarketOfASellerController(
   req: Request,
   res: Response,
   next: any,
@@ -124,7 +197,15 @@ export async function getAuctionOnMarketOfASeller(
   }
 }
 
-export async function getAuctionSoldOnMarketOfASeller(
+/**
+ * Controller for getting auction that has been sold by a seller.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function getAuctionsSoldOnMarketOfASellerController(
   req: Request,
   res: Response,
   next: any,
@@ -138,7 +219,15 @@ export async function getAuctionSoldOnMarketOfASeller(
   }
 }
 
-export async function banUserFromAuction(
+/**
+ * Controller for sellers to ban a user from their auctions.
+ *
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {*} next
+ */
+export async function banUserFromAuctionController(
   req: Request,
   res: Response,
   next: any,
