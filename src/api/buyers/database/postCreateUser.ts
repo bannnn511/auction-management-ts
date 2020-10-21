@@ -8,6 +8,14 @@ import {
 
 import { Buyers } from '../../../database/models';
 
+/**
+ * Query for creating new user.
+ * Password will be hashed.
+ *
+ * @export
+ * @param {Buyers} user
+ * @return {Promise<Buyers>}
+ */
 export async function createUser(user: Buyers) {
   const hashPassword = await bcrypt.hash(user.password, Hash.SALT);
   return Buyers.create({

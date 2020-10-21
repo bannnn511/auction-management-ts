@@ -7,7 +7,7 @@ import { AuctionManagements, Buyers } from '../../../database/models';
  *
  * @export
  * @param {string} id - user id
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getUserWinningAuctions(id: string) {
   // return sequelize.query(

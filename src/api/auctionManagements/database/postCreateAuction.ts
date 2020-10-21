@@ -8,7 +8,7 @@ import { AuctionManagements } from '../../../database/models';
  * @export
  * @param {AuctionManagements} auction
  * @param {Transaction} transaction
- * @return {*}
+ * @return {Promise<AuctionManagements>}
  */
 export async function createAuction(
   auction: AuctionManagements,

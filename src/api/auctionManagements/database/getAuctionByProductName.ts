@@ -8,7 +8,7 @@ import { AuctionManagements, Products } from '../../../database/models';
  *
  * @export
  * @param {string} productName - The product name.
- * @return {*}
+ * @return {Promise<AuctionManagements>}
  */
 export async function getAuctionByProductName(productName: string) {
   return AuctionManagements.findOne({

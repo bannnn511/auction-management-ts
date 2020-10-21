@@ -11,7 +11,7 @@ import { pagination } from '../../../shared/helpers';
  * @param {number} page - page index
  * @param {number} pagesize - page size
  * @param {string} sellerId - sellerId.
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getAuctionOnMarketOfASeller(
   page: number,

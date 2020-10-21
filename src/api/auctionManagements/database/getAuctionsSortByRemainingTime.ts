@@ -10,7 +10,7 @@ import { defaultLimit } from '../../../shared/helpers/constant';
  *
  * @export
  * @param {number} option - number of auctions you want to get.
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getAuctionsSortByRemainingTime(option: number) {
   return AuctionManagements.findAll({

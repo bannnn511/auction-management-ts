@@ -11,7 +11,7 @@ import { pagination } from '../../../shared/helpers';
  * @export
  * @param {number} page - index of page.
  * @param {number} pagesize - size of page.
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getAllAuctions(page: number, pagesize: number) {
   const { offset, limit } = pagination(page, pagesize);

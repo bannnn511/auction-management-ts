@@ -6,7 +6,7 @@ import { AuctionManagements } from '../../../database/models';
  *
  * @export
  * @param {*} data
- * @return {*}
+ * @return {Promise<AuctionManagements>}
  */
 
 // Todo: update type for data parameter.

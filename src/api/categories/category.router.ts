@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { categorySchema } from './category.schem';
+import { categorySchema } from './category.schema';
 import {
   authentication,
   redisValidation,

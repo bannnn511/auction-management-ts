@@ -5,7 +5,7 @@ import { AuctionManagements } from '../../../database/models';
  *
  * @export
  * @param {string} id - The auction Id.
- * @return {*}
+ * @return {Promise<AuctionManagements>}
  */
 export async function getAllAuctionWithAuctionId(id: string) {
   return AuctionManagements.findOne({

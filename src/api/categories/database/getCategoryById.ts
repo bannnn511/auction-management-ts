@@ -5,7 +5,7 @@ import { Categories } from '../../../database/models';
  *
  * @export
  * @param {string} id
- * @return {*} 
+ * @return {Promise<Categories>}
  */
 export async function getCategory(id: string) {
   return Categories.findOne({

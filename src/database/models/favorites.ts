@@ -23,15 +23,15 @@ export class Favorites extends Model<Favorites> {
   id!: string;
 
   @ForeignKey(() => Buyers)
-  @Column({ type: DataType.UUIDV4 })
+  @Column({ type: DataType.UUIDV4, field: 'user_id' })
   userId!: string;
 
   @ForeignKey(() => Products)
-  @Column({ type: DataType.UUIDV4 })
+  @Column({ type: DataType.UUIDV4, field: 'product_id' })
   productId!: string;
 
   @ForeignKey(() => Categories)
-  @Column({ type: DataType.UUIDV4 })
+  @Column({ type: DataType.UUIDV4, field: 'category_id' })
   categoryId!: string;
 
   @Column({ type: DataType.UUIDV4, field: 'created_by' })

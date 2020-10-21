@@ -6,7 +6,7 @@ import { Categories } from '../../../database/models';
  * @export
  * @param {string} categoryId - category id
  * @param {string} categoryName - new category name
- * @return {*}
+ * @return {Promise<Categories>}
  */
 export async function updateCategory(categoryId: string, categoryName: string) {
   await Categories.update({ categoryName }, { where: { id: categoryId } });

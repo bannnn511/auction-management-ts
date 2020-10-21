@@ -10,7 +10,7 @@ import { pagination } from '../../../shared';
  * @param {number} page - index of page
  * @param {number} pagesize - page size
  * @param {string} sellerId - id of seller.
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getAuctionSoldBySellerBusiness(
   page: number,

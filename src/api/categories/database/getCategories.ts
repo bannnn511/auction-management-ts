@@ -7,7 +7,7 @@ import { pagination } from '../../../shared/helpers';
  * @export
  * @param {number} page
  * @param {number} pagesize
- * @return {*}
+ * @return {Promise<Categories[]>}
  */
 export async function getAllCategories(page: number, pagesize: number) {
   const { offset, limit } = pagination(page, pagesize);

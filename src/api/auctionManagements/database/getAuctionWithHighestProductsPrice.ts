@@ -11,7 +11,7 @@ import { defaultLimit } from '../../../shared/helpers/constant';
  *
  * @export
  * @param {number} option - number of auctions you want to get.
- * @return {*}
+ * @return {Promise<AuctionManagements[]>}
  */
 export async function getAuctionsWithHighestProductsPrice(option: number) {
   return AuctionManagements.findAll({

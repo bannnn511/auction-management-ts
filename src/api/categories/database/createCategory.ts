@@ -5,7 +5,7 @@ import { Categories } from '../../../database/models/categories';
  *
  * @export
  * @param {Categories} category
- * @return {*}
+ * @return {Promise<Categories>}
  */
 export async function createCategory(category: Categories) {
   return Categories.create({
