@@ -5,6 +5,8 @@ import { authRouter } from './authentication/authentication.router';
 import { userRouter } from './buyers/buyer.router';
 import { categoriesRouter } from './categories/category.router';
 import { favoriteRouter } from './favorites/favorite.router';
+import { notificationRouter } from './notification/notification.router';
+import { onesignalRouter } from './onesignal/onesignal.router';
 
 const apiRouter = Router();
 
@@ -19,6 +21,8 @@ apiRouter.use('/buyers', userRouter);
 apiRouter.use('/histories', historiesRouter);
 apiRouter.use('/auctions', auctionRouter);
 apiRouter.use('/categories', categoriesRouter);
-apiRouter.use('/favourites', favoriteRouter);
+apiRouter.use('/favorites', favoriteRouter);
+apiRouter.use('/notifications', notificationRouter);
+apiRouter.use('/onesignal', onesignalRouter);
 
 export { apiRouter };

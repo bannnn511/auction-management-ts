@@ -1,26 +1,30 @@
 import { Transaction } from 'sequelize/types';
-import { HistoryObject } from '../../../shared/models/historyObject';
 import { AuctionHistories } from '../../../database/models';
 
 /**
  * Query for creating auction history.
  *
  * @export
- * @param {HistoryObject} body
+ * @param {string} userId - id of user who bid.
+ * @param {string} auctionId - id of bidden auction
+ * @param {number} price - bidden price.
  * @param {Transaction} t
  * @return {Promise<AuctionHistories>}
  */
 export async function createAuctionHistory(
-  body: HistoryObject,
+  userId: string,
+  auctionId: string,
+  price: number,
+
   t: Transaction,
 ) {
   return AuctionHistories.create(
     {
-      userId: body.userId,
-      auctionId: body.auctionId,
-      price: body.price,
-      createdBy: body.createdBy,
-      updatedBy: body.updatedBy,
+      userId,
+      auctionId,
+      price,
+      createdBy: userId,
+      updatedBy: userId,
     },
     {
       transaction: t,

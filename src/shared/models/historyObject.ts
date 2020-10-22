@@ -3,14 +3,14 @@ import { AuctionHistories } from '../../database/models/auctionHistories';
 
 export class HistoryObject extends AuctionHistories {
   constructor(
-    id?: string,
-    userId?: string,
-    auctionId?: string,
-    price?: number,
-    createdBy?: string,
-    updatedBy?: string,
-    created_at?: Date,
-    updated_at?: Date,
+    id: string,
+    userId: string,
+    auctionId: string,
+    price: number,
+    createdBy: string,
+    updatedBy: string,
+    created_at: Date,
+    updated_at: Date,
   ) {
     super();
     this.id = _.defaultTo(id, '');

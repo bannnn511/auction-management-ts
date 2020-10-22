@@ -2,7 +2,7 @@ import socketio from 'socket.io';
 import chalk from 'chalk';
 import { Server } from 'https';
 
-let io: any;
+let io: socketio.Server;
 const activeAuctions: any[] = [];
 function init(server: Server) {
   io = socketio(server);

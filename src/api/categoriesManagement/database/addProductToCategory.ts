@@ -5,20 +5,26 @@ import { CategoriesManagements } from '../../../database/models/categoryManageme
  * Query for adding a product to a category.
  *
  * @export
- * @param {CategoriesManagements} data
+ * @param {string} categoryId - category id
+ * @param {string} productId - product id
+ * @param {string} createdBy - user id
+ * @param {string} updatedBy - user id
  * @param {Transaction} t
  * @return {Promise<CategoriesManagements>}
  */
 export async function addProductToCategory(
-  data: CategoriesManagements,
+  categoryId: string,
+  productId: string,
+  createdBy: string,
+  updatedBy: string,
   t: Transaction,
 ) {
   return CategoriesManagements.create(
     {
-      categoryId: data.categoryId,
-      productId: data.productId,
-      createdBy: data.createdBy,
-      updatedBy: data.updatedBy,
+      categoryId,
+      productId,
+      createdBy,
+      updatedBy,
     },
     { transaction: t },
   );

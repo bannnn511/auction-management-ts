@@ -3,7 +3,6 @@ import { AuctionManagements } from '../../../database/models';
 
 /**
  * Query for creating new auction.
- * Transaction for ACID.
  *
  * @export
  * @param {AuctionManagements} auction
@@ -11,17 +10,20 @@ import { AuctionManagements } from '../../../database/models';
  * @return {Promise<AuctionManagements>}
  */
 export async function createAuction(
-  auction: AuctionManagements,
+  sellerId: string,
+  productId: string,
+  description: string,
+  endAt: Date,
   transaction: Transaction,
 ) {
   return AuctionManagements.create(
     {
-      sellerId: auction.sellerId,
-      productId: auction.productId,
-      description: auction.description,
-      createdBy: auction.createdBy,
-      updatedBy: auction.updatedBy,
-      endAt: auction.endAt,
+      sellerId,
+      productId,
+      description,
+      createdBy: sellerId,
+      updatedBy: sellerId,
+      endAt,
     },
     { transaction },
   );

@@ -1,13 +1,24 @@
 import { AuctionParticipatings } from '../../../database/models/auctionParticipatings';
 import { UserBanStatus } from '../../../shared/helpers/constant';
 
-export async function userParticipateAuctions(data: AuctionParticipatings) {
+/**
+ * Query for mark that user have participated an auction.
+ *
+ * @export
+ * @param {string} userId
+ * @param {string} auctionId
+ * @return {*}
+ */
+export async function userParticipateAuctions(
+  userId: string,
+  auctionId: string,
+) {
   return AuctionParticipatings.create({
-    userId: data.userId,
-    auctionId: data.auctionId,
+    userId,
+    auctionId,
     status: UserBanStatus.ACTIVE,
-    createdBy: data.createdBy,
-    updatedBy: data.updatedBy,
+    createdBy: userId,
+    updatedBy: userId,
     isReminderCreated: false,
   });
 }
